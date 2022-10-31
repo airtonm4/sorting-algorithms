@@ -47,9 +47,6 @@ public class SortAlgorithms {
         sort(array, 0, array.length - 1);
         System.out.println(Arrays.toString(array) + "\n");
 
-        for (int i = 0; i < 50; i++) {
-            System.out.print(array[i] + ", ");
-        }
     }
 
     private static void sort(int[] array, int init, int end) {
@@ -90,6 +87,66 @@ public class SortAlgorithms {
 
     // HeapSort
 
-    public static void HeapSort() {
+    public static void HeapSort(int[] array) {
+        int n = array.length;
+
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heap(array, n, i);
+        }
+
+        System.out.println(Arrays.toString(array));
+        System.out.println(isHeap(array, 0, n - 1));
+
+        for (int i = n - 1; i >= 0; i--) {
+            int temp = array[0];
+            array[0] = array[i];
+            array[i] = temp;
+
+            heap(array, i, 0);
+            System.out.println(Arrays.toString(array));
+        }
+        System.out.println(Arrays.toString(array));
+        System.out.println(isHeap(array, 0, n - 1));
+    }
+
+    private static void heap(int[] array, int n, int i) {
+        int largest = i;
+        int l = 2 * i + 1;
+        int r = 2 * i + 2;
+
+        if (l < n && array[l] > array[largest])
+            largest = l;
+
+        if (r < n && array[r] > array[largest])
+            largest = r;
+
+        if (largest != i) {
+            int swap = array[i];
+            array[i] = array[largest];
+            array[largest] = swap;
+
+            heap(array, n, largest);
+        }
+    }
+
+    public static boolean isHeap(int arr[], int i, int n) {
+        // If (2 * i) + 1 >= n, then leaf node, so return true
+        if (i >= (n - 1) / 2) {
+            return true;
+        }
+
+        // If an internal node and
+        // is greater than its
+        // children, and same is
+        // recursively true for the
+        // children
+        if (arr[i] >= arr[2 * i + 1]
+                && arr[i] >= arr[2 * i + 2]
+                && isHeap(arr, 2 * i + 1, n)
+                && isHeap(arr, 2 * i + 2, n)) {
+            return true;
+        }
+
+        return false;
     }
 }
