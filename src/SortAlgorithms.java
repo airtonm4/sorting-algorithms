@@ -1,8 +1,6 @@
-import java.util.Arrays;
-
 public class SortAlgorithms {
 
-    public static void InsetionSort(int[] array) {
+    public static void InsertionSort(int[] array) {
         int j = 0;
 
         for (int i = 0; i < array.length; i++) {
@@ -16,14 +14,12 @@ public class SortAlgorithms {
             array[j] = aux;
         }
 
-        System.out.println(Arrays.toString(array));
     }
 
     public static void ShellSort(int[] array) {
         int n = array.length;
 
         for (int gap = n / 2; gap > 0; gap /= 2) {
-            System.out.println(gap);
             for (int i = gap; i < n; i++) {
                 int key = array[i];
                 int j = i;
@@ -34,25 +30,20 @@ public class SortAlgorithms {
                 }
 
                 array[j] = key;
-                System.out.println(Arrays.toString(array));
             }
         }
 
-        System.out.println(Arrays.toString(array));
     }
 
     // QuickSort
 
     public static void QuickSort(int[] array) {
         sort(array, 0, array.length - 1);
-        System.out.println(Arrays.toString(array) + "\n");
-
     }
 
     private static void sort(int[] array, int init, int end) {
         if (init < end) {
             int pivot = partition(array, init, end);
-            // System.out.println(Arrays.toString(array));
             sort(array, init, pivot - 1);
             sort(array, pivot + 1, end);
         }
@@ -94,19 +85,13 @@ public class SortAlgorithms {
             heap(array, n, i);
         }
 
-        System.out.println(Arrays.toString(array));
-        System.out.println(isHeap(array, 0, n - 1));
-
         for (int i = n - 1; i >= 0; i--) {
             int temp = array[0];
             array[0] = array[i];
             array[i] = temp;
 
             heap(array, i, 0);
-            System.out.println(Arrays.toString(array));
         }
-        System.out.println(Arrays.toString(array));
-        System.out.println(isHeap(array, 0, n - 1));
     }
 
     private static void heap(int[] array, int n, int i) {
@@ -127,26 +112,5 @@ public class SortAlgorithms {
 
             heap(array, n, largest);
         }
-    }
-
-    public static boolean isHeap(int arr[], int i, int n) {
-        // If (2 * i) + 1 >= n, then leaf node, so return true
-        if (i >= (n - 1) / 2) {
-            return true;
-        }
-
-        // If an internal node and
-        // is greater than its
-        // children, and same is
-        // recursively true for the
-        // children
-        if (arr[i] >= arr[2 * i + 1]
-                && arr[i] >= arr[2 * i + 2]
-                && isHeap(arr, 2 * i + 1, n)
-                && isHeap(arr, 2 * i + 2, n)) {
-            return true;
-        }
-
-        return false;
     }
 }
