@@ -1,5 +1,12 @@
+/**
+ * Classe contendo um algoritmos de ordenação
+ */
 public class SortAlgorithms {
-
+    /**
+     * InsetionSort
+     * 
+     * @param array
+     */
     public static void InsertionSort(int[] array) {
         int j = 0;
 
@@ -16,6 +23,11 @@ public class SortAlgorithms {
 
     }
 
+    /**
+     * ShellSort
+     * 
+     * @param array
+     */
     public static void ShellSort(int[] array) {
         int n = array.length;
 
@@ -35,8 +47,11 @@ public class SortAlgorithms {
 
     }
 
-    // QuickSort
-
+    /**
+     * QuickSort
+     * 
+     * @param array
+     */
     public static void QuickSort(int[] array) {
         sort(array, 0, array.length - 1);
     }
@@ -76,8 +91,11 @@ public class SortAlgorithms {
         return j;
     }
 
-    // HeapSort
-
+    /**
+     * HeapSort
+     * 
+     * @param array
+     */
     public static void HeapSort(int[] array) {
         int n = array.length;
 

@@ -1,9 +1,10 @@
 import java.util.Random;
 
 /**
- * GenerateVetor, class to generate the dataset.
+ * GenerateVetor, classe para gerar o dataset
  */
 public class GenerateVetor {
+
     public int[] oneThousand = new int[1000];
     public int[] twoThousand = new int[2000];
     public int[] threeThousand = new int[3000];
@@ -14,7 +15,6 @@ public class GenerateVetor {
     public int[] eightThousand = new int[8000];
     public int[] nineThousand = new int[9000];
     public int[] tenThousand = new int[10000];
-    public int[] big = new int[100000];
 
     public GenerateVetor() {
         this.generateOneThousand();
@@ -27,7 +27,6 @@ public class GenerateVetor {
         this.generateEightThousand();
         this.generateNineThousand();
         this.generateTenThousand();
-        this.generateBig();
     }
 
     private void generateOneThousand() {
@@ -111,12 +110,4 @@ public class GenerateVetor {
         }
     }
 
-    private void generateBig() {
-        Random numberRandom = new Random();
-
-        for (int i = 0; i < big.length; i++) {
-            this.big[i] = numberRandom.nextInt();
-        }
-
-    }
 }

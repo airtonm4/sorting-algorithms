@@ -1,26 +1,42 @@
 import java.io.FileOutputStream;
-import java.util.Arrays;
 
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+/**
+ * Classe para testar e gerar o relatório em um arquivo xls
+ */
 public class SortingTest {
     public static void main(String[] args) throws Exception {
+        /**
+         * Classe com os vetores a serem ordenados.
+         */
         GenerateVetor arrays = new GenerateVetor();
 
+        /**
+         * Matriz com o tempo de execução dos algoritmos.
+         */
         long[][] executionTimeMatriz = new long[4][10];
 
+        /**
+         * Foi decidido fazer dessa forma ocupando diversas linhas para evitar erros e
+         * realizar um desenvolvimento rápido com baixo conhecimento sobre essa
+         * linguagem.
+         */
         executionTimeMatriz[0] = insertionSort(arrays);
-        System.out.println();
         executionTimeMatriz[1] = shellSort(arrays);
-        System.out.println();
         executionTimeMatriz[2] = heapSort(arrays);
-        System.out.println();
         executionTimeMatriz[3] = quickSort(arrays);
 
+        /*
+         * Diretório do meu computador
+         */
         String filename = "C:/Users/Airton/Documents/IFGoiano/Terms/fourthTerm/EDII/Trabalho1_ED2/Sorting.xls";
 
+        /**
+         * Classes utilizados para gerar um relatório em excell
+         */
         FileOutputStream fileOutputStream = new FileOutputStream(filename);
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Times");
@@ -38,8 +54,6 @@ public class SortingTest {
                 HSSFRow rows = sheet.createRow((j + 1) + i * 10);
                 String algorithm = i == 0 ? "insertionSort" : i == 1 ? "shellSort" : i == 2 ? "heapSort" : "quickSort";
 
-                System.out.println(algorithm);
-
                 rows.createCell(0).setCellValue(algorithm);
                 rows.createCell(1).setCellValue((j + 1) * 1000);
                 rows.createCell(2).setCellValue(executionTimeMatriz[i][j]);
@@ -53,6 +67,12 @@ public class SortingTest {
 
     }
 
+    /**
+     * Método para receber os tempos de execução do insertionSort.
+     * 
+     * @param arrays
+     * @return Tempo de execução
+     */
     public static long[] insertionSort(GenerateVetor arrays) {
 
         long start;
@@ -256,6 +276,12 @@ public class SortingTest {
         return allTimes;
     }
 
+    /**
+     * Método para receber os tempos de execução do shellSort.
+     * 
+     * @param arrays
+     * @return Tempo de execução
+     */
     public static long[] shellSort(GenerateVetor arrays) {
 
         long start;
@@ -438,6 +464,12 @@ public class SortingTest {
         return allTimes;
     }
 
+    /**
+     * Método para receber os tempos de execução do heapSort.
+     * 
+     * @param arrays
+     * @return Tempo de execução
+     */
     public static long[] heapSort(GenerateVetor arrays) {
 
         long start;
@@ -620,6 +652,12 @@ public class SortingTest {
         return allTimes;
     }
 
+    /**
+     * Método para receber os tempos de execução do quickSort.
+     * 
+     * @param arrays
+     * @return Tempo de execução
+     */
     public static long[] quickSort(GenerateVetor arrays) {
 
         long start;
