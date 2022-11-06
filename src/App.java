@@ -1,22 +1,59 @@
+import java.io.FileOutputStream;
 import java.util.Arrays;
-import java.util.Random;
-import java.util.stream.Stream;
+
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 public class App {
     public static void main(String[] args) throws Exception {
         GenerateVetor arrays = new GenerateVetor();
 
-        insertionSort(arrays);
+        long[][] executionTimeMatriz = new long[4][10];
+
+        executionTimeMatriz[0] = insertionSort(arrays);
         System.out.println();
-        shellSort(arrays);
+        executionTimeMatriz[1] = shellSort(arrays);
         System.out.println();
-        heapSort(arrays);
+        executionTimeMatriz[2] = heapSort(arrays);
         System.out.println();
-        quickSort(arrays);
+        executionTimeMatriz[3] = quickSort(arrays);
+
+        String filename = "C:/Users/Airton/Documents/IFGoiano/Terms/fourthTerm/EDII/Trabalho1_ED2/Sorting.xls";
+
+        FileOutputStream fileOutputStream = new FileOutputStream(filename);
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("Times");
+
+        HSSFRow rowhead = sheet.createRow(0);
+
+        rowhead.createCell(0).setCellValue("Algorithm");
+        rowhead.createCell(1).setCellValue("array");
+        rowhead.createCell(2).setCellValue("execution time");
+
+        for (int i = 0; i < executionTimeMatriz.length; i++) {
+            // Algorithms
+            for (int j = 0; j < executionTimeMatriz[i].length; j++) {
+                // Times
+                HSSFRow rows = sheet.createRow((j + 1) + i * 10);
+                String algorithm = i == 0 ? "insertionSort" : i == 1 ? "shellSort" : i == 2 ? "heapSort" : "quickSort";
+
+                System.out.println(algorithm);
+
+                rows.createCell(0).setCellValue(algorithm);
+                rows.createCell(1).setCellValue((j + 1) * 1000);
+                rows.createCell(2).setCellValue(executionTimeMatriz[i][j]);
+            }
+        }
+
+        workbook.write(fileOutputStream);
+
+        fileOutputStream.close();
+        workbook.close();
 
     }
 
-    public static void insertionSort(GenerateVetor arrays) {
+    public static long[] insertionSort(GenerateVetor arrays) {
 
         long start;
         long end;
@@ -215,10 +252,11 @@ public class App {
 
         averageTime = 0;
 
-        System.out.println(Arrays.toString(allTimes));
+        // System.out.println(Arrays.toString(allTimes));
+        return allTimes;
     }
 
-    public static void shellSort(GenerateVetor arrays) {
+    public static long[] shellSort(GenerateVetor arrays) {
 
         long start;
         long end;
@@ -396,10 +434,11 @@ public class App {
 
         allTimes[9] = averageTime;
 
-        System.out.println(Arrays.toString(allTimes));
+        // System.out.println(Arrays.toString(allTimes));
+        return allTimes;
     }
 
-    public static void heapSort(GenerateVetor arrays) {
+    public static long[] heapSort(GenerateVetor arrays) {
 
         long start;
         long end;
@@ -577,10 +616,11 @@ public class App {
 
         allTimes[9] = averageTime;
 
-        System.out.println(Arrays.toString(allTimes));
+        // System.out.println(Arrays.toString(allTimes));
+        return allTimes;
     }
 
-    public static void quickSort(GenerateVetor arrays) {
+    public static long[] quickSort(GenerateVetor arrays) {
 
         long start;
         long end;
@@ -768,7 +808,8 @@ public class App {
 
         allTimes[9] = averageTime;
 
-        System.out.println(Arrays.toString(allTimes));
+        // System.out.println(Arrays.toString(allTimes));
+        return allTimes;
 
     }
 }
