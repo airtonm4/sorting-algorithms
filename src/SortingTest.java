@@ -5,7 +5,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-public class App {
+public class SortingTest {
     public static void main(String[] args) throws Exception {
         GenerateVetor arrays = new GenerateVetor();
 
